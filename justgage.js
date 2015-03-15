@@ -507,10 +507,10 @@
       Cx = w / 2 + dx;
       Cy = h / 1.95 + dy;
 
-      Xo = w / 2 + dx + Ro * Math.cos(alpha);
-      Yo = h - (h - Cy) - Ro * Math.sin(alpha);
-      Xi = w / 2 + dx + Ri * Math.cos(alpha);
-      Yi = h - (h - Cy) - Ri * Math.sin(alpha);
+      Xo = Cx + Ro * Math.cos(alpha);
+      Yo = Cy - Ro * Math.sin(alpha);
+      Xi = Cx + Ri * Math.cos(alpha);
+      Yi = Cy - Ri * Math.sin(alpha);
 
       path = "M" + (Cx - Ri) + "," + Cy + " ";
       path += "L" + (Cx - Ro) + "," + Cy + " ";
