@@ -289,7 +289,11 @@
 
     // formatNumber: boolean
     // formats numbers with commas where appropriate
-    formatNumber : obj.kvLookup('formatNumber', config, dataset, false)
+    formatNumber : obj.kvLookup('formatNumber', config, dataset, false),
+
+    // showScale : boolean
+    // hide or display Scale
+    showScale: obj.kvLookup('showScale', config, dataset, false)
   };
 
   // variables
@@ -589,6 +593,20 @@
   });
   if(obj.config.donut) {
     obj.level.transform("r" + obj.config.donutStartAngle + ", " + (obj.params.widgetW/2 + obj.params.dx) + ", " + (obj.params.widgetH/1.95 + obj.params.dy));
+  }
+
+  // Scale
+  this.scale = [];
+  if (this.config.showScale) {
+    var colNumber = this.config.levelColors.length;
+    for (var index = 0; index < colNumber; ++index) {
+      this.scale.push(this.canvas.path().attr({
+        "stroke": "none",
+        "fill": "#" + this.config.levelColors[colNumber - index - 1],
+        pki: [this.config.min + (this.config.max - this.config.min) * (colNumber - index) / colNumber, this.config.min, this.config.max, this.params.widgetW, this.params.widgetH, this.params.dx, this.params.dy, 0.1]
+      }));
+      this.scale[index].id = this.config.id + "-scale";
+    }
   }
 
   // title
